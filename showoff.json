@@ -1,0 +1,9 @@
+{
+  "name": "My Preso", 
+  "sections": [ 
+                {"section":"intro"},
+                {"section":"getting started"},
+                {"section":"generators"},
+                {"section":"active record"}
+              ]
+}
