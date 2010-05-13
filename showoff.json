@@ -3,7 +3,9 @@
   "name": "A brief overview of Rails 3", 
   "sections": [ 
                 {"section":"architecture"},
-                {"section":"intro"},
+                {"section":"active model"},
+                {"section":"abstract controller"},
+                {"section":"action mailer"},
                 {"section":"getting started"},
                 {"section":"generators"},
                 {"section":"active record"},
