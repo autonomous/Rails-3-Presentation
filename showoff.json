@@ -1,9 +1,12 @@
 {
-  "name": "My Preso", 
+  "title": "Rails 3",
+  "name": "A brief overview of Rails 3", 
   "sections": [ 
+                {"section":"architecture"},
                 {"section":"intro"},
                 {"section":"getting started"},
                 {"section":"generators"},
-                {"section":"active record"}
+                {"section":"active record"},
+                {"section":"routes"}
               ]
 }
