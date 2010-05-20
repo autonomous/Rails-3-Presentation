@@ -2,6 +2,7 @@
   "title": "Rails 3",
   "name": "A brief overview of Rails 3", 
   "sections": [ 
+                {"section":"action view"},
                 {"section":"abstract controller"},
                 {"section":"action controller"},
                 {"section":"architecture"},
