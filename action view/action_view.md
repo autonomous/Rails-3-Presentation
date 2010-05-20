@@ -10,6 +10,7 @@
 * It's faster
 * XSS protection
 * Unobtrusive JavaScript helpers
+* HTML5
 
 !SLIDE smbullets incremental
 
@@ -53,4 +54,14 @@
       id="create-post"  
       method="post"  
       data-remote="true">
-    ... 
+    ...
+    
+!SLIDE bullets incremental
+# ActionView #
+***
+
+* HTML output is now escaped by default
+* h( ... ) is now swimming with the fishes
+* raw( ... ) if you want the un-escaped content
+* Constant vigilance is for perl programmers...
+    
