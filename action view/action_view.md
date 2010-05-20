@@ -55,7 +55,13 @@
       method="post"  
       data-remote="true">
     ...
-    
+
+!SLIDE center
+
+# ActionView #
+***
+![Supported JS drivers](javascript_drivers.png)    
+
 !SLIDE bullets incremental
 # ActionView #
 ***
