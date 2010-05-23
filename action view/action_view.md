@@ -1,41 +1,73 @@
 !SLIDE
 
 # ActionView #
-
-!SLIDE bullets incremental
-
-# ActionView #
 ***
-* Major overhaul
-* It's faster
-* XSS protection
-* Unobtrusive JavaScript helpers
-* HTML5
+<!-- Clear separation between ActoinController and ActionView -->
+* ActionView exposes a __single API entry point__ for rendering templates and partials
 
-!SLIDE smbullets incremental
+!SLIDE
 
-# ActionView #
+## It's faster ##
 ***
+
+!SLIDE bullets
+
 * Template lookups is faster
 * Rendering Partial collections is much faster
 
-<!-- Clear separation between ActoinController and ActionView -->
-
-* ActionView exposes a __single API entry point__ for rendering templates and partials
-
-!SLIDE code
-
-# Less talk, more code!! #
-
-!SLIDE code
-
-# ActionView #
+!SLIDE bullets
+## XSS protection ##
 ***
+
+!SLIDE code smaller
+    
     @@@ruby
-    form_for @post, :remote => true
+    = form_for @person do |f|
+      content_tag(:h1) do
+        = @person.title
+      end
+      = f.label :name, "Name"
+      = f.text_field :name
+      = f.label :profile, "Profile"
+      = f.text_area :profile
+      = f.submit
+    end
 ***
+    @@@html
+    <form action="/posts" method="post">
+      <h1>&lt;script&gt;more evil content here&lt;/script&gt;</h1>
+      <label for="person_name">Name</label>
+      <input type="text" name="person[name]" \
+        id="person_name" value="Darth Vader" />
+      <label for="person_profile">Profile</label>
+      <textarea name="person[profile]" id="person_profile">
+        &lt;script&gt;some evil content here&lt;/script&gt;
+      </textarea>
+      <input type="submit">Create</input>
+    </form>
+
+!SLIDE code
+
+    @@@ruby
+    # Mark html as safe in your helpers
+    "<div>#{snatch_cookie}</div>".html_safe
+
+    # Manually un-escape html in your views 
+    raw( @user.description )
+
+
+!SLIDE
+## HTML5 &  Unobtrusive JavaScript helpers ##
+***
+
+!SLIDE code
+
+    @@@ruby
+    = form_for @post, :remote => true do |f|
+***
+    @@@html
     ...
-    ...
+    ...  
     ...
     ...
     ...
@@ -43,10 +75,8 @@
     
 !SLIDE code
 
-# ActionView #
-***
     @@@ruby
-    form_for @post, :remote => true
+    = form_for @post, :remote => true do |f|
 ***
     @@@html
     <form 
@@ -57,17 +87,19 @@
     ...
 
 !SLIDE center
-
-# ActionView #
-***
-![Supported JS drivers](javascript_drivers.png)    
-
-!SLIDE bullets incremental
-# ActionView #
+##  Core team maintains Prototype and jQuery drivers!  ##
 ***
 
-* HTML output is now escaped by default
-* h( ... ) is now swimming with the fishes
-* raw( ... ) if you want the un-escaped content
-* Constant vigilance is for perl programmers...
-    
+![Supported JS drivers](javascript_drivers.png)
+
+!SLIDE code small
+    @@@ruby
+    # inside config/initializers/jquery_init.rb
+    ActionView::Helpers::AssetTagHelper.
+      register_javascript_expansion(
+        :jquery => %w/jquery jquery-ui rails application/
+      )
+      
+    # inside your layout
+    javascript_include_tag :jquery
+
