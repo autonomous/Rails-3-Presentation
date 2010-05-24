@@ -15,6 +15,10 @@
       resources :posts 
     end 
 
+!SLIDE
+
+
+
 !SLIDE center
 
 ##  New Routes DSL  ##

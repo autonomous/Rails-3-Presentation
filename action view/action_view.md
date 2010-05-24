@@ -92,9 +92,31 @@
 
 ![Supported JS drivers](javascript_drivers.png)
 
+!SLIDE commandline
+  
+## download jquery.js
+    $ curl -L http://code.jquery.com/jquery-1.4.2.min.js > / public/javascripts/jquery.js
+    
+## download rails.js driver for jquery ##
+    $ curl -L http://github.com/rails/jquery-ujs/raw/master/src/rails.js > public/javascripts/rails.js
+
+!SLIDE code small
+
+***
+    @@@ruby
+    # inside config/initializers
+    module ActionView::Helpers::AssetTagHelper
+      remove_const :JAVASCRIPT_DEFAULT_SOURCES
+      JAVASCRIPT_DEFAULT_SOURCES = %w(jquery.js rails.js)
+      reset_javascript_include_default
+    end
+  
+    # inside your layout
+    javascript_include_tag :default
+
 !SLIDE code small
     @@@ruby
-    # inside config/initializers/jquery_init.rb
+    # inside config/initializers
     ActionView::Helpers::AssetTagHelper.
       register_javascript_expansion(
         :jquery => %w/jquery jquery-ui rails application/
