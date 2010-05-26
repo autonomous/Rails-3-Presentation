@@ -2,22 +2,70 @@
 # Routes #
 ***
 
-!SLIDE code
+!SLIDE code small
 
     @@@ruby
-    # Rails 2.x
+    # Rails 2
     ActionController::Routing::Routes.draw do |map| 
-      map.resources :posts 
+      ...
     end 
-    
-    # Rails 3.x - namespaced to your app
+***
+    @@@ruby    
+    # Rails 3 - namespaced to your app
     AppName::Application.routes do
-      resources :posts 
+      ...
     end 
 
-!SLIDE
+!SLIDE code small
 
+    @@@ruby
+    match ':controller(/:action(/:id(.:format)))'
+    
+***    
 
+    @@@ruby
+    # login_url or login_path
+    match '/login' => 'accounts#login', :as => 'login'
+    
+***    
+
+    @@@ruby
+    # root_url or login_path
+    root :to => 'blogs#index'
+
+!SLIDE code smaller
+
+    @@@ruby
+    # http://localhost:3000/articles/2005/11/06
+    # maps to
+    # params = {:year => '2005', :month => '11', :day => '06'}
+    match '/articles/:year/:month/:day', :constraints => {
+      :controller => 'articles',
+      :action => 'find_by_date',
+      :year => /\d{4}/,
+      :month => /\d{1,2}/,
+      :day => /\d{1,2}/
+    }
+
+!SLIDE code smaller
+
+    @@@ruby
+    # Rails 2
+    map.resources( :forums, 
+        :collection => { :sortable => :get, :sort => :put }
+        ) do |forums|
+      forums.resources :topics
+    end
+***
+    @@@ruby
+    # Rails 3
+    resources :forums do
+      collection do
+        get :sortable
+        put :sort
+      end
+      resources :topics
+    end
 
 !SLIDE center
 
@@ -68,7 +116,7 @@
     
     # In your routes file
     map.connect "/foo/:id", :controller => "generic", \
-      :action => "redirect", :url => "/bar/%{id}s"
+      :action => "redirect", :url => "/bar/%{id}"
 
 !SLIDE
 ## Generic redirecting in Rails 3 ##
