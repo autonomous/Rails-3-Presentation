@@ -67,6 +67,58 @@
       resources :topics
     end
 
+!SLIDE
+## Generic redirecting in Rails 2.3 ##
+***
+
+!SLIDE code smaller
+
+    @@@ruby
+    # Controller
+    class GenericController < ApplicationController
+      def redirect
+        redirect_to(params[:url] % params, params[:options])
+      end
+    end
+    
+    # In your routes file
+    map.connect "/foo/:id", :controller => "generic", \
+      :action => "redirect", :url => "/bar/%{id}s"
+
+!SLIDE
+## Generic redirecting in Rails 3 ##
+
+!SLIDE code small
+
+    @@@ruby
+    match "/foo/:id", :to => redirect("/bar/%{id}s")
+
+!SLIDE
+
+## What does the source code look like? ##
+
+!SLIDE code smaller
+
+    @@@ruby 
+    def redirect(*args, &block)
+      options = args.last.is_a?(Hash) ? args.pop : {}
+
+      path = args.shift || block
+      path_proc = path.is_a?(Proc) ? path : proc {|params| path % params }
+      status = options[:status] || 301
+
+      lambda do |env|
+        req = Rack::Request.new(env)
+        params = path_proc.call(env["action_dispatch.request.path_parameters"])
+        url = req.scheme + '://' + req.host + params
+        [
+          status, 
+          {'Location' => url, 'Content-Type' => 'text/html'}, 
+          ['Moved Permanently']
+        ]
+      end
+    end
+    
 !SLIDE center
 
 ##  New Routes DSL  ##
@@ -93,57 +145,9 @@
     end
 
     match '/cookies' => CookieMonsterApp
-    
+
 !SLIDE bullets
 
 * Ramaze
 * Camping
 * Merb
-
-!SLIDE
-## Generic redirecting in Rails 2.3 ##
-***
-
-!SLIDE code smaller
-
-    @@@ruby
-    # Controller
-    class GenericController < ApplicationController
-      def redirect
-        redirect_to(params[:url] % params, params[:options])
-      end
-    end
-    
-    # In your routes file
-    map.connect "/foo/:id", :controller => "generic", \
-      :action => "redirect", :url => "/bar/%{id}"
-
-!SLIDE
-## Generic redirecting in Rails 3 ##
-
-!SLIDE code small
-
-    @@@ruby
-    match "/foo/:id", :to => redirect("/bar/%{id}s")
-
-!SLIDE code smaller
-
-    @@@ruby 
-    def redirect(*args, &block)
-      options = args.last.is_a?(Hash) ? args.pop : {}
-
-      path = args.shift || block
-      path_proc = path.is_a?(Proc) ? path : proc {|params| path % params }
-      status = options[:status] || 301
-
-      lambda do |env|
-        req = Rack::Request.new(env)
-        params = path_proc.call(env["action_dispatch.request.path_parameters"])
-        url = req.scheme + '://' + req.host + params
-        [
-          status, 
-          {'Location' => url, 'Content-Type' => 'text/html'}, 
-          ['Moved Permanently']
-        ]
-      end
-    end
