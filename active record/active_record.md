@@ -5,8 +5,13 @@
 
 
 !SLIDE
-# ARel - Active Relation #
+# ... and ARel #
+
 ***
+
+!SLIDE 
+
+# WTF is ARel? #
 
 !SLIDE code smaller
     @@@ruby
