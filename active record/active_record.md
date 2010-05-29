@@ -9,10 +9,6 @@
 
 ***
 
-!SLIDE 
-
-# WTF is ARel? #
-
 !SLIDE code smaller
     @@@ruby
     # Article.find(:all, :order => "published_at desc", :limit => 10)

@@ -30,7 +30,7 @@
 ***    
 
     @@@ruby
-    # root_url or login_path
+    # root_url or root_path
     root :to => 'blogs#index'
 
 !SLIDE code smaller
