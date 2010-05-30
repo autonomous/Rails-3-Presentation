@@ -87,4 +87,3 @@
     class NewsPost < ActiveRecord::Base
       validates_with ReallyComplexValidator
     end
-    
