@@ -133,4 +133,3 @@
     update( ids, updates )
     update_all( updates )
     exists?
-    
