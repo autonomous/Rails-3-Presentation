@@ -2,8 +2,6 @@
   "title": "Rails 3",
   "name": "A brief overview of Rails 3", 
   "sections": [ 
-                {"section":"action controller"},
-                {"section":"abstract controller"},
                 {"section":"action mailer"},
                 {"section":"action view"},
                 {"section":"architecture"},
@@ -13,6 +11,8 @@
                 {"section":"intro"},
                 {"section":"routes"},
                 {"section":"active record"},
-                {"section":"active model"}
+                {"section":"active model"},
+                {"section":"action controller"},
+                {"section":"abstract controller"}
               ]
 }
