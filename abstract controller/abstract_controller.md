@@ -1,8 +1,10 @@
-!SLIDE! code smaller
+!SLIDE
 
 # AbstractController #
 
 ***
+
+!SLIDE code smaller
     @@@ruby
     
     
@@ -21,11 +23,8 @@
     module ActionMailer
     ...
     
-!SLIDE! code smaller
+!SLIDE code smaller
 
-# AbstractController #
-
-***
     @@@ruby
     # AbstractController handles the basic notion of controllers,
     # actions, and action dispatching, and not much else.
@@ -44,11 +43,7 @@
     module ActionMailer
     ...
     
-!SLIDE! code smaller
-
-# AbstractController #
-
-***
+!SLIDE code smaller
 
     @@@ruby
     # AbstractController handles the basic notion of controllers,
@@ -70,8 +65,6 @@
 
 !SLIDE code
 
-# AbstractController #
-***
     @@@ruby
     module AbstractController
       extend ActiveSupport::Autoload

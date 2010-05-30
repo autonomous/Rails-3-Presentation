@@ -1,3 +1,96 @@
+!SLIDE bullets incremental
+
+# ActionController #
+***
+
+* ActionDispatch
+* AbstractController
+
+!SLIDE bullets
+
+# ActionDispatch #
+***
+
+* Request
+* Response
+* Mime type handling
+* Middleware and Integration Test support
+  
+!SLIDE bullets
+
+# AbstractController #
+***
+* Includes the concept of controllers, rendering, layouts, helpers, and callbacks
+* Nothing about HTTP or mail delivery
+
+!SLIDE code smaller
+
+    @@@ruby
+    # Rails 2.3
+    class UsersController < ApplicationController
+      def index
+        @users = User.all
+    
+        respond_to do |format|
+          format.html
+          format.xml { render :xml => @users }
+        end
+      end
+
+      def create
+        @user = User.new(params[:user])
+
+        respond_to do |format|
+          if @user.save
+            flash[:notice] = "User was successfully created"
+            format.html { redirect_to @user }
+            format.xml  { render :xml => @user, :status => :created, :location => @user }
+          else
+            format.html { render "new" }
+            format.xml  { render :xml => @user.errors, :status => :unprocessable_entity  }
+          end
+        end
+      end
+    end
+
+!SLIDE code smaller
+
+    @@@ruby
+    # Rails 3
+    class UsersController < ApplicationController
+      respond_to :html, :xml
+
+      def index
+        @users = User.all
+        respond_with @users
+      end
+
+      def create
+        @user = User.new(params[:user])
+        flash[:notice] = "User was successfully created" if @user.save
+        respond_with @user
+      end
+    end
+
+!SLIDE 
+
+# respond_with #
+***
+The respond_with method is a simple wrapper to an object called responder. A responder is any object that responds to call and receives the current controller and the given resource as parameters.
+
+!SLIDE bullets incremental
+
+# And this is cool because...? #
+***
+
+* We can extend the responder behaviour
+* Change behaviour in responder, not controller
+* Suggestions?
+
+!SLIDE
+
+# More about that some other time #
+
 !SLIDE code smaller
 
 # ActionController::Base #
