@@ -1,8 +1,7 @@
 !SLIDE center
+  
+# Ruby on Rails 3 #
 
-* github
-* blog
-* OnlineGuarding.com
+!['Rails'](rails.jpg)
 
-!SLIDE smbullets incremental
-# Rails 3 overview #
+## An overview by Christopher Spring ##
