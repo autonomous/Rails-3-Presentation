@@ -87,10 +87,6 @@ The respond_with method is a simple wrapper to an object called responder. A res
 * Change behaviour in responder, not controller
 * Suggestions?
 
-!SLIDE
-
-# More about that some other time #
-
 !SLIDE code smaller
 
 # ActionController::Base #
