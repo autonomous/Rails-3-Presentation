@@ -83,8 +83,8 @@ The respond_with method is a simple wrapper to an object called responder. A res
 # And this is cool because...? #
 ***
 
+* Change behaviour in one place
 * We can extend the responder behaviour
-* Change behaviour in responder, not controller
 * Suggestions?
 
 !SLIDE code smaller

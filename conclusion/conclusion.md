@@ -1,3 +1,8 @@
+!SLIDE
+
+# How do i feel about Rails 3? #
+***
+
 !SLIDE bullets
 
 ## Is cool because...? ##
